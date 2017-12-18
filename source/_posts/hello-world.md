@@ -17,7 +17,10 @@ $ hexo new "My New Post"
 <div class="note info">测试文字note info效果</div>
 <div class="note warning">测试文字note warning效果</div>
 <div class="note danger">测试文字note danger效果</div>
-><div class="note danger">成功推送hexo</div>
+<div class="note danger">成功推送hexo</div>
+<div class="blockquote-center">公司电脑推送成功!</div>
+这个是[百度][baidu]链接
+[baidu]: https://www.baidu.com
 
 More info: [Writing](https://hexo.io/docs/writing.html)
 
