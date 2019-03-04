@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端面试题解题  如何解决跨域问题 jsonp CORS 服务端对于CORS的支持 通过设置Access-Control-Allow-Origin来进行   通过修改document.domain来跨子域 将子域和主域的document.domain设为同一个主域 这两个域名必须属于同一个基础域名 而且所用的协议 端口都要一致     window.name(兼容几乎所有浏览器) 该属性有个特征:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试题解题">
+<meta property="og:url" content="https://jsjzh.github.io/uncategorized/前端面试题解题/index.html">
+<meta property="og:site_name" content="金哲豪的部落格">
+<meta property="og:description" content="前端面试题解题  如何解决跨域问题 jsonp CORS 服务端对于CORS的支持 通过设置Access-Control-Allow-Origin来进行   通过修改document.domain来跨子域 将子域和主域的document.domain设为同一个主域 这两个域名必须属于同一个基础域名 而且所用的协议 端口都要一致     window.name(兼容几乎所有浏览器) 该属性有个特征:">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-04T03:29:20.073Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试题解题">
+<meta name="twitter:description" content="前端面试题解题  如何解决跨域问题 jsonp CORS 服务端对于CORS的支持 通过设置Access-Control-Allow-Origin来进行   通过修改document.domain来跨子域 将子域和主域的document.domain设为同一个主域 这两个域名必须属于同一个基础域名 而且所用的协议 端口都要一致     window.name(兼容几乎所有浏览器) 该属性有个特征:">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jsjzh.github.io/uncategorized/前端面试题解题/">
+
+
+
+
+
+  <title>前端面试题解题 | 金哲豪的部落格</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b05c43c7657c4d43c9e979bb10914cdd";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">金哲豪的部落格</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">裤裆三重奏</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jsjzh.github.io/uncategorized/前端面试题解题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="金哲豪">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="金哲豪的部落格">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端面试题解题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T01:27:40+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="blockquote-center">前端面试题解题</div>
+
+<h4 id="如何解决跨域问题"><a href="#如何解决跨域问题" class="headerlink" title="如何解决跨域问题"></a>如何解决跨域问题</h4><ul>
+<li>jsonp</li>
+<li>CORS<ul>
+<li>服务端对于CORS的支持 通过设置<code>Access-Control-Allow-Origin</code>来进行</li>
+</ul>
+</li>
+<li>通过修改<code>document.domain</code>来跨子域<ul>
+<li>将子域和主域的<code>document.domain</code>设为同一个主域<ul>
+<li>这两个域名必须属于同一个基础域名 而且所用的协议 端口都要一致</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>window.name(兼容几乎所有浏览器)<ul>
+<li>该属性有个特征: 在一个窗口(window)的生命周期内 窗口载入的所有页面都是共享一个<code>window.name</code>的 每个页面对<code>window.name</code>都有读写的权限 <code>window.name</code>是持久存在于 一个窗口载入过的所有页面中的</li>
+</ul>
+</li>
+<li><strong>HTML5</strong>中新引进的window.postMessage</li>
+<li>flash</li>
+<li>在服务器上设置代理页面</li>
+</ul>
+<h4 id="XSS原理及防范"><a href="#XSS原理及防范" class="headerlink" title="XSS原理及防范"></a>XSS原理及防范</h4><ul>
+<li>原理<ul>
+<li>是指攻击者往Web页面里插入恶意html标签或者javascript代码 然后用户提交表单的时候 把信息传送到攻击者的服务器 或者窃取cookie中用户的私密信息</li>
+</ul>
+</li>
+<li>防范<ul>
+<li><em>首先代码里对用户输入的地方和变量都需要仔细检查长度和对”&lt;”,”&gt;”,”;”,”’”等字符做过滤；其次任何内容写到页面之前都必须加以encode，避免不小心把html tag 弄出来。这一个层面做好，至少可以堵住超过一半的XSS 攻击。</em></li>
+<li>避免直接在<code>cookie</code>中泄露用户隐私<ul>
+<li>还可以使<code>cookie</code>和系统ip绑定来降低<code>cookie</code>泄露后的危险 <em>获取ip地址可以在后端php或者其他方法获取 前端获取ip地址似乎有点问题</em></li>
+</ul>
+</li>
+<li>如果网站不需要浏览器对<code>cookie</code>进行操作 可以在<code>Set-cookie</code>末尾加上<code>HttpOnly</code></li>
+<li>尽量采用<code>POST</code>而非<code>GET</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="XSS与CSRF"><a href="#XSS与CSRF" class="headerlink" title="XSS与CSRF"></a>XSS与CSRF</h4><ul>
+<li>区别<ul>
+<li><code>XSS</code>是获取信息 不需要提前知道用户页面的代码和数据包</li>
+<li><code>CSRF</code>是替代用户完成指定的动作 需要知道用户页面的代码和数据包<ul>
+<li>登录受信任站点A 并在本地生成<code>cookie</code></li>
+<li>在不登出A的情况下 访问危险站点B</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Worker和webSocket"><a href="#Worker和webSocket" class="headerlink" title="Worker和webSocket"></a>Worker和webSocket</h4><ul>
+<li>worker<ul>
+<li>通过<code>worker = new Worker(url)</code>加载一个JS文件来创建一个worder 返回worker实例</li>
+<li>通过<code>worker.postMessage(data)</code>方法来向worker发送数据</li>
+<li>绑定<code>worker.onmessage</code>方法来接受worker发送送过来的数据</li>
+<li>可以使用<code>worker.terminate()</code>来终止一个worker的执行</li>
+</ul>
+</li>
+<li>webSocket<ul>
+<li>是web应用程序的传输协议 提供了<strong>双向 按序到达</strong>的数据流</li>
+<li>是一个<strong>HTML5</strong>协议</li>
+<li>连接是持久的 服务器的更新可以被及时推送给客户端 而不需要客户端去轮询</li>
+</ul>
+</li>
+</ul>
+<h4 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h4><ul>
+<li><code>http</code>承载与<code>tcp</code>协议上 在<code>http</code>和<code>tcp</code>之间添加一个安全协议层<code>ssl或tsl</code>就成了<code>https</code></li>
+<li><code>http</code>端口为80</li>
+<li><code>https</code>的端口为443</li>
+</ul>
+<h4 id="javascript垃圾回收机制"><a href="#javascript垃圾回收机制" class="headerlink" title="javascript垃圾回收机制"></a>javascript垃圾回收机制</h4><ul>
+<li><p>标记清除(mark and sweep)</p>
+<ul>
+<li>当变量进入执行环境的时候 比如函数中声明的一个变量 垃圾回收器将其标记为<strong>进入环境</strong>当变量离开环境的时候 也就是函数执行结束的时候 将其标记为<strong>离开环境</strong></li>
+<li>垃圾回收器会在运行的时候给存储在内存中的所有变量加上标记，然后去掉环境中的变量以及被环境中变量所引用的变量（闭包），在这些完成之后仍存在标记的就是要删除的变量了</li>
+</ul>
+</li>
+<li><p>引用计数(reference counting)</p>
+<ul>
+<li>在低版本IE中经常会出现内存泄露，很多时候就是因为其采用引用计数方式进行垃圾回收。引用计数的策略是跟踪记录每个值被使用的次数，当声明了一个 变量并将一个引用类型赋值给该变量的时候这个值的引用次数就加1，如果该变量的值变成了另外一个，则这个值得引用次数减1，当这个值的引用次数变为0的时 候，说明没有变量在使用，这个值没法被访问了，因此可以将其占用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为0的值占用的空间。</li>
+<li>在IE中虽然JavaScript对象通过标记清除的方式进行垃圾回收，但BOM与DOM对象却是通过引用计数回收垃圾的，也就是说只要涉及BOM及DOM就会出现循环引用问题。</li>
+</ul>
+</li>
+</ul>
+<h4 id="前端工程的价值"><a href="#前端工程的价值" class="headerlink" title="前端工程的价值"></a>前端工程的价值</h4><ul>
+<li>为简化用户使用提供技术支持（交互部分）</li>
+<li>为多个浏览器兼容性提供支持</li>
+<li>为提高用户浏览速度（浏览器性能）提供支持</li>
+<li>为跨平台或者其他基于webkit或其他渲染引擎的应用提供支持</li>
+<li>为展示数据提供支持（数据接口）</li>
+</ul>
+<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><ul>
+<li>代码层面<ul>
+<li>避免使用css表达式</li>
+<li>避免使用高级选择器</li>
+<li>避免使用通配选择器</li>
+</ul>
+</li>
+<li>缓存利用<ul>
+<li>缓存<code>Ajax</code></li>
+<li>使用<code>CDN</code>// TODO</li>
+<li>使用外部js和css文件以便缓存</li>
+<li>添加<code>Expires头</code>// TODO</li>
+<li>服务端配置<code>Etag</code></li>
+<li>减少<code>DNS</code>查找// TODO</li>
+</ul>
+</li>
+<li>请求数量<ul>
+<li>合并样式和脚本</li>
+<li>使用css图片精灵// TODO</li>
+<li>首屏之外的图片资源按需加载</li>
+<li>静态资源延迟加载</li>
+</ul>
+</li>
+<li>请求带宽<ul>
+<li>压缩文件</li>
+<li>开启GZIP// TODO</li>
+</ul>
+</li>
+</ul>
+<h4 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h4><ul>
+<li>用<code>hash-table</code>优化查找</li>
+<li>少用全局变量</li>
+<li>用<code>innerHTML</code>代替<code>DOM</code>操作 减少<code>DOM</code>操作次数 优化<code>javascript</code>性能</li>
+<li>用<code>setTimeout</code>来避免页面失去响应</li>
+<li>缓存查找DOM节点的结果</li>
+<li>避免全局查询</li>
+<li>避免使用<code>with</code></li>
+<li>多个变量声明合并</li>
+<li>避免图片和iFrame等的空<code>Src</code> 空的<code>Src</code>会重新加载当前页面</li>
+<li>尽量避免在<code>HTML</code>标签中写<code>Style</code>属性 {但是Reactjs中提倡使用这种方法 因为React的思想是ui组件化}</li>
+</ul>
+<h4 id="移动端性能优化"><a href="#移动端性能优化" class="headerlink" title="移动端性能优化"></a>移动端性能优化</h4><ul>
+<li>尽量使用css3动画</li>
+<li>使用<code>touch</code>事件替代<code>click</code>事件</li>
+<li>避免使用css3渐变阴影效果</li>
+<li>使用`transform: translateZ(0)来开启硬件加速</li>
+<li>不滥用<code>float</code> 在渲染时候计算量比较大</li>
+<li>不滥用web字体</li>
+<li>合理使用<code>requestAnimationFrame</code>动画替代<code>setTimeout</code></li>
+<li><code>CSS3 transtions</code> <code>CSS3 3D transforms</code> <code>opacity</code> <code>canvas</code> <code>webGL</code> <code>video</code> 会触发GPU渲染</li>
+</ul>
+<h4 id><a href="#" class="headerlink" title="#"></a>#</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/搭建个人网站系列/不同姿势搭建个人博客系列-二/" rel="next" title="不同姿势搭建个人博客系列(二)">
+                <i class="fa fa-chevron-left"></i> 不同姿势搭建个人博客系列(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/uncategorized/sublime-emmet/" rel="prev" title="sublime-emmet">
+                sublime-emmet <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="金哲豪">
+            
+              <p class="site-author-name" itemprop="name">金哲豪</p>
+              <p class="site-description motion-element" itemprop="description">认真的灵魂会发光</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/jsjzh" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何解决跨域问题"><span class="nav-number">1.</span> <span class="nav-text">如何解决跨域问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS原理及防范"><span class="nav-number">2.</span> <span class="nav-text">XSS原理及防范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS与CSRF"><span class="nav-number">3.</span> <span class="nav-text">XSS与CSRF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Worker和webSocket"><span class="nav-number">4.</span> <span class="nav-text">Worker和webSocket</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP和HTTPS"><span class="nav-number">5.</span> <span class="nav-text">HTTP和HTTPS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#javascript垃圾回收机制"><span class="nav-number">6.</span> <span class="nav-text">javascript垃圾回收机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端工程的价值"><span class="nav-number">7.</span> <span class="nav-text">前端工程的价值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#性能优化"><span class="nav-number">8.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码优化"><span class="nav-number">9.</span> <span class="nav-text">代码优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#移动端性能优化"><span class="nav-number">10.</span> <span class="nav-text">移动端性能优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">11.</span> <span class="nav-text">#</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">金哲豪</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
